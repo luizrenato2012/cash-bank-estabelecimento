@@ -1,0 +1,37 @@
+<app-toolbar></app-toolbar>
+
+<mat-card>
+  <mat-card-content>
+  <form class="form-signin" #frm_login="ngForm" (ngSubmit)="login()">
+    <div class="alert alert-danger" *ngIf="mensagem!=''">
+        {{mensagem}}
+    </div>
+
+    <mat-form-field>
+      <mat-label>Entre com o Email</mat-label>
+      <input matInput type="email" id="inputEmail" placeholder="Email " required autofocus class="form-control"
+        name="email" [(ngModel)]="email" >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Entre com a Senha</mat-label>
+      <input type="password" matInput id="inputPassword" placeholder="Senha" required class="form-control"
+        name="password" [(ngModel)]="password">
+    </mat-form-field>
+    <div>  
+       <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px">Login</button>
+    </div >   
+  </form>
+</mat-card-content>
+</mat-card>
+<!-- teste-->
+<!-- <br>
+<div class="container">
+  <ul>
+  <li><a routerLink="/transacoes">Transacoes</a> </li>
+  <li><a routerLink="/login">Login</a> </li>
+  </ul>
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>  -->

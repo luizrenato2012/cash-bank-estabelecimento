@@ -1,0 +1,29 @@
+<div class="container">
+  <h3>Produtos</h3>
+
+  <div class="input-group mb-3">
+    <input type="text" name="argumento" class="form-control" placeholder="Digite um nome" 
+      [(ngModel)]="argumento"/>
+    <button class="btn btn-outline-secondary" type="button" (click)="pesquisa()">Pesquisa</button>
+  </div>
+
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Preco</th>
+          <th>Tipo</th>
+          </tr> 
+      </thead>
+      <tbody>
+        <tr *ngFor="let linha of linhas">
+          <td>{{ linha.nome }}</td>
+          <td>{{ linha.preco }}</td>
+          <td>{{ linha.tipo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="button" class="nav-link active" (click)="logout()">Logout</button>
+</div>

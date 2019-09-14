@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span> Cash bank - Cliente</span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+    <span *ngIf="estaLogado()" class="usuario">Olá {{ getUsuario() }}!</span>
+  <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button> -->
+
+  <!--<mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="estaLogado()">
+        <mat-icon>account_balance_wallet</mat-icon>
+        <span>Transações</span>
+      </button>
+      <button mat-menu-item (click)="logoff()" *ngIf="estaLogado()">
+        <mat-icon>forward</mat-icon>
+        <span>Logoff</span>
+      </button>
+    </mat-menu> -->
+
+  </mat-toolbar-row>
+</mat-toolbar>
