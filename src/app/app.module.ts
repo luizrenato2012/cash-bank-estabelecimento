@@ -26,6 +26,8 @@ import { EstabelecimentoService } from './estabelecimento/estabelecimento.servic
 import { HomeComponent } from './home/home.component';
 
 import { MaterialModule } from './material/material.module';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 // import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
@@ -50,7 +52,13 @@ import { MaterialModule } from './material/material.module';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [AngularFireStorage, 
               LoginService, 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class AppComponent {
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private route : Router) {
   }
 
 }

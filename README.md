@@ -3,7 +3,7 @@
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
 
 ## Descrição
-Esta aplicação é parte
+Esta aplicação é parte web do MVP projeto Cash-Bank.
 
 ## Development server
 

@@ -1,0 +1,24 @@
+
+mat-toolbar {
+  background: orange;
+}
+
+sidenav-container {
+  height: 100%;
+  margin: 5px;
+}
+/*
+
+.sidenav {
+  width: 200px;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+} */
+
+.mat-icon {
+  margin-right: 10px;
+}
+

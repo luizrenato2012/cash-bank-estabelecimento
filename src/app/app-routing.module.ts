@@ -12,17 +12,20 @@ import { HomeComponent } from './home/home.component';
 const routes : Routes = [
   {path: '' , component : TransacaoComponent},
   {path: 'login' , component : LoginComponent},
-  {path: 'home' ,  component : HomeComponent},
-  {path: 'transacoes' ,  component : TransacaoComponent},
-  {path: 'produtos' ,  component : ProdutoComponent},
-  {path: 'teste' ,  component : TesteComponent},
-  {path: '**' ,       component : NotFoundComponent}
+  {path: 'home' ,  component : HomeComponent , 
+    children : [
+      {path: 'pesquisa' ,  component : TransacaoComponent},
+      {path: 'teste' ,  component : TesteComponent},
+    ]},
+  // {path: 'produtos' ,  component : ProdutoComponent},
+  {path: '**' ,       component : NotFoundComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
 ];
 
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   exports :[
     RouterModule

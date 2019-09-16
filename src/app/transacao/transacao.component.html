@@ -1,8 +1,5 @@
-<app-toolbar></app-toolbar>
-
-
 <div>
-   <h3>Transações</h3>  
+  <h3>Pesquisa</h3>
   <mat-form-field style="margin-right: 25px">
     <mat-label class="label">Selecione a data inicial</mat-label>
     <input [value]="dataInicial" matInput [matDatepicker]="myPicker" placeholder="data" name="dataInicial"
@@ -25,7 +22,8 @@
     <!-- Data Column -->
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef> Data </th>
-      <td mat-cell *matCellDef="let transaction"> {{ transaction.data.seconds | timestampToDate | date :'dd/MM/yyyy' }} </td>
+      <td mat-cell *matCellDef="let transaction"> {{ transaction.data.seconds | timestampToDate | date :'dd/MM/yyyy' }}
+      </td>
     </ng-container>
 
     <!-- cpf Column -->
@@ -57,5 +55,5 @@
     <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>  -->
   </table>
 
-  
+
 </div>

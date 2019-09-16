@@ -8,9 +8,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule, MatFormField } from '@angular/material/form-field';
 import { MatDatepickerModule, MatDatepicker,  } from '@angular/material/datepicker';
 import { MatNativeDateModule,  MatSidenavModule } from '@angular/material';
-import { MatTableModule, MatColumnDef, MatHeaderCell, MatHeaderCellDef } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -27,7 +28,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatToolbarModule,
     MatMenuModule,
     MatSidenavModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FlexLayoutModule
   ],
   exports : [
     CommonModule,
@@ -42,7 +44,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     MatSidenavModule,
     MatNativeDateModule,
-    
+    FlexLayoutModule
   ],
   declarations: [],
   providers: [MatNativeDateModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
