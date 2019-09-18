@@ -6,7 +6,6 @@ import { Observable, Observer } from 'rxjs';
 
 import { Estabelecimento } from './estabelecimento';
 import { LoginService } from '../login/login.service';
-import { async } from 'rxjs/internal/scheduler/async';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,6 @@ import { async } from 'rxjs/internal/scheduler/async';
 export class EstabelecimentoService {
 
   constructor(private firebaseDb : AngularFirestore, private loginService: LoginService ) {}
-  // estabelecimento : Estabelecimento;
-
 
   // busca (cnpj: string) {
   //   return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
@@ -31,6 +28,13 @@ export class EstabelecimentoService {
     console.log('buscando estabelcimento');
     return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
       ref => ref.where("usuario.email","==",email )).valueChanges();
+  }
+
+   getListaEstabelecimento(): Observable<Estabelecimento[]> {
+    let email = this.loginService.getEmailUsuario();
+    let estab: any = {};
+    return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
+      ref => ref.where("usuario.email","==",email )).valueChanges(); 
   }
 
   async getEstabelecimento(){

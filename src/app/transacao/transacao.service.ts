@@ -41,13 +41,9 @@ export class TransacaoService {
     dataAtual.setSeconds(0);
     dataAtual.setMilliseconds(0);
 
-    console.log("DAta " + dataAtual);
-    let retorno = this.db.collection("transacoes", 
-      ref => ref
-                 .where("data", "==", dataAtual)
-                ).valueChanges();
-                
-    return retorno;
+    return this.db.collection("transacoes", 
+      ref => ref.where("data", "==", dataAtual))
+        .valueChanges();
   }
 
   inclui(transacao: any ) {

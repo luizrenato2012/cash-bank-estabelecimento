@@ -55,10 +55,10 @@ export class TransacaoComponent implements OnInit {
     transacao.data = this.zeraHora(new Date());
     transacao.percentualCashBask=3.5;
     transacao.usuario={};
-    transacao.usuario.cpf="69454766007";
-    transacao.usuario.nome="Austrenoma Castro Srina";
+    transacao.usuario.cpf="05580935072";
+    transacao.usuario.nome="Estilio Sanio";
     
-    transacao.valorTransacao=5.49;
+    transacao.valorTransacao=10.49;
 
     this.transacaoService.inclui(transacao)
       .then( ()=> console.log("Transacao incluida com sucesso"))

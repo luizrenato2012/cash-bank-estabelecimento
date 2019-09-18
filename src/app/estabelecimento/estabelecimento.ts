@@ -6,5 +6,6 @@ export class Estabelecimento {
     usuario : {
         nome: string;
         email: string;
-    }
+    };
+    saldo=0;
 }
