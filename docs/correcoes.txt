@@ -1,0 +1,17 @@
+ - CORRECOES
+  - Transacoes 
+		-> Pesquisa de transacoes nao usa cnpj
+		-> Alinhamento das colunas incorreto
+		-> Colunas valor/percentual com formato incorreto
+		-> Tela sem bordas
+		
+ - Dashboard
+		-> Alinhamento das colunas incorreto
+		-> Colunas valor/percentual com formato incorreto
+
+Otiimizações
+ - EstabelecimentoService
+		-> fazer cache do objeto de estabelecimento
+
+- Tela Login
+		-> Ajustar mensagem 

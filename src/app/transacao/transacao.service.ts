@@ -46,6 +46,21 @@ export class TransacaoService {
         .valueChanges();
   }
 
+  pesquisaDiaAtualEstabelecimento(cnpj: string) {
+    console.log("Pesquisando transacoes");
+    let  dataAtual = new Date();
+    dataAtual.setHours(0);
+    dataAtual.setMinutes(0);
+    dataAtual.setSeconds(0);
+    dataAtual.setMilliseconds(0);
+
+    return this.db.collection("transacoes", 
+      ref => ref.where(
+          "data", "==", dataAtual)
+          .where("cnpj","==", cnpj))
+        .valueChanges();
+  }
+
   inclui(transacao: any ) {
     transacao.id = this.db.createId();
     let collection : AngularFirestoreCollection  =this.db.collection("transacoes"); 

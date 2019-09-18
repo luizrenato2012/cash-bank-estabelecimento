@@ -28,6 +28,22 @@ export class DashboardComponent implements OnInit {
 
   buscaTransacoesDoDia() {
     let estabelecimento : Estabelecimento;
+    this.estabelecimentoService.getListaEstabelecimento()
+            .subscribe( (retorno: Estabelecimento[])=> {
+              estabelecimento = retorno[0];
+              this.saldoTotal = estabelecimento.saldo;
+              this.transacaoService.pesquisaDiaAtualEstabelecimento(estabelecimento.cnpj)
+                .subscribe((retorno: any[])=>{
+                  this.transacoes = retorno;
+                  this.saldoDia = this.transacaoService.totalliza(this.transacoes);
+                });
+
+    }, (error)=> {
+      console.log(`Erro ao iniciar dashboard ${error}`);
+    });
+
+
+    
     this.transacaoService.pesquisaDiaAtual()
       .subscribe( retorno => {
           this.transacoes = retorno;
