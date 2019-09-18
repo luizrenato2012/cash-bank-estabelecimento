@@ -5,6 +5,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { Transacao, DataFirebase } from './transacao';
 
+const CNPJ_1="1111111111";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +15,9 @@ export class TransacaoService {
   constructor(private db: AngularFirestore) { }
   private transacoes = [];
 
+  //TODO passar parametro de CNPJ
   pesquisa(dataInicial: Date, dataFinal:Date) {
-    const CNPJ="1111111111";
-    console.log("Pesquisando transacoes");
+    // console.log("Pesquisando transacoes");
 
     let retorno = this.db.collection("transacoes", 
       ref => ref
@@ -29,17 +31,27 @@ export class TransacaoService {
                 ).valueChanges();
                 
     return retorno;
-
-      // .subscribe(retorno => {
-      //   console.log(`Total de registros ${retorno.length});
-      //   this.transacoes = retorno;
-      // });
-
   }
 
-  inclui(transacao: any , dataEntrada: Date ) {
+  pesquisaDiaAtual() {
+    console.log("Pesquisando transacoes");
+    let  dataAtual = new Date();
+    dataAtual.setHours(0);
+    dataAtual.setMinutes(0);
+    dataAtual.setSeconds(0);
+    dataAtual.setMilliseconds(0);
+
+    console.log("DAta " + dataAtual);
+    let retorno = this.db.collection("transacoes", 
+      ref => ref
+                 .where("data", "==", dataAtual)
+                ).valueChanges();
+                
+    return retorno;
+  }
+
+  inclui(transacao: any ) {
     transacao.id = this.db.createId();
-    transacao.data = dataEntrada;
     let collection : AngularFirestoreCollection  =this.db.collection("transacoes"); 
     return collection.doc(transacao.id).set(transacao);
   }

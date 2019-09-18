@@ -21,3 +21,12 @@
       font-size: 130%;
       width: 120%;
   }
+
+  .alerta{
+    margin: 5px; 
+  }
+
+  .mat-form-field {
+    width: 100%;
+    border-color: red;
+  }

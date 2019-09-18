@@ -17,21 +17,4 @@ export class ToolbarComponent implements OnInit {
     this.loginService.logout();
   }
 
-  getEstabelecimento() {
-    let estabelecimento = this.loginService.getEstabelecimento() ;
-    console.log(`get estabelecimento ${estabelecimento}`);
-    return estabelecimento;
-  }
-
-  estaLogado() {
-    let estabelecimento: any = this.loginService.getEstabelecimento();
-    console.log(`cnpj- estabelcimento ${estabelecimento}`); 
-    return estabelecimento.cnpj;
-  }
-
-  getUsuario() {
-    let estabelecimento: any = this.loginService.getEstabelecimento();
-    return estabelecimento ? estabelecimento.usuario.nome : ""; 
-  }
-
 }

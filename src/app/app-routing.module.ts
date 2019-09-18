@@ -7,19 +7,26 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProdutoComponent } from './produto/produto.component';
 import { TesteComponent } from './teste/teste.component';
 import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeResolve } from './home/home.resolve';
 //import { RouterModule } from '@angular/router'
 
 const routes : Routes = [
-  {path: '' , component : TransacaoComponent},
+  {path: '' , component : LoginComponent},
   {path: 'login' , component : LoginComponent},
   {path: 'home' ,  component : HomeComponent , 
     children : [
       {path: 'pesquisa' ,  component : TransacaoComponent},
+      {path: 'dashboard' ,  component : DashboardComponent},
       {path: 'teste' ,  component : TesteComponent},
-    ]},
-  // {path: 'produtos' ,  component : ProdutoComponent},
+
+    ],
+    resolve : {
+      estabelecimento : HomeResolve
+    }
+  },
   {path: '**' ,       component : NotFoundComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home/dashboard', pathMatch: 'full'},
 ];
 
 

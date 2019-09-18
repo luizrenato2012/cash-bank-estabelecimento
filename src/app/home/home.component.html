@@ -1,9 +1,28 @@
   <mat-sidenav-container fullscreen class="container">
 
-  <mat-sidenav #start>
+    <!-- <mat-toolbar color="primary" class="example-toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1 class="example-app-name">Responsive App</h1>
+    </mat-toolbar> -->
 
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="start.open()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Cash Bank - Estabelecimento </span>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
+      <span> {{ nomeEstabelecimento }}</span>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav #start>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/home'">
+        <a mat-list-item>
+          <mat-icon>perm_identity</mat-icon>
+          <span>Olá, {{ usuario }}!</span>
+        </a>
+
+      <a mat-list-item [routerLink]="'/home/dashboard'">
         <mat-icon>payment</mat-icon>
         <span>Movimento Diário</span>
       </a>
@@ -19,11 +38,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-toolbar color="primary">
-    <button mat-icon-button (click)="start.open()">
-        <mat-icon>menu</mat-icon>
-    </button>
-  </mat-toolbar>
+  
 
    <router-outlet></router-outlet>
 </mat-sidenav-container> 

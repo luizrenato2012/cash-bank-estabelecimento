@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth/auth';
@@ -9,17 +9,20 @@ import { EstabelecimentoService } from '../estabelecimento/estabelecimento.servi
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-
+export class LoginService implements OnInit{
+  
   private _mensagemLogin:string='';
-  private estabelecimento: any = {};
-
+  private emailUsuario: string;
+  
   constructor(private fireAuth :AngularFireAuth, 
-              private router: Router,
-              private estabelecimentoService : EstabelecimentoService) {
-    console.log('criando login');
-    this.user = this.fireAuth.user;    
-   }
+    private router: Router) {
+      console.log('criando  service login');
+      this.user = this.fireAuth.user;    
+    }
+    
+  ngOnInit(): void {
+    console.log("> Iniciando login service ");
+  }
 
   user : Observable<firebase.User>;
 
@@ -33,40 +36,30 @@ export class LoginService {
         .then(userCredential=>{
           localStorage.user = userCredential.user.uid;
           this._mensagemLogin="";
-
-          console.log("Pesquisanfo estabelecimento ");
-          this.estabelecimentoService.buscaPorUsuario(email)
-            .subscribe(retorno => {
-              console.log(`Estabelecimento ${JSON.stringify(retorno)}`);
-              this.estabelecimento = retorno.length == 0 ? {} : retorno[0];
-            });
-
+          this.emailUsuario = email;
           this.router.navigate(['home']);
         }).catch(error=>{
           console.log('Erro ao obter credenciais:\n'+error);
           this._mensagemLogin= error.code==erroConexao.codigo ?  erroConexao.descricao :
              "Login/senha invalido(s)!";
           reject(this._mensagemLogin);
-          //this.router.navigate(['/login']);
         })
         .catch(error=> {
           console.log('Erro no login:\n'+error);
           this._mensagemLogin="Ocorreu um erro ao fazer login, tente novamente.";
           reject(this._mensagemLogin);
-          //this.router.navigate(['/login']);
         });
     }) ;
-  } "auth/network-request-failed"
+  }
 
   logout() {
     this.fireAuth.auth.signOut();
     localStorage.removeItem("user");
-    this.estabelecimento={};
     this.router.navigate(['/login']);
   }
 
   getMensagemLogin() {
-    console.log('retornandon ' + this._mensagemLogin);
+    // console.log('retornando ' + this._mensagemLogin);
     return this._mensagemLogin;
   }
 
@@ -74,12 +67,8 @@ export class LoginService {
     this._mensagemLogin=msg;
   }
 
-  getEstabelecimento() {
-    if (!this.estabelecimento.cnpj) {
-      console.log('Dados do estabelecimento invalidos');
-    }
-    console.log(`Estabelecimento ${JSON.stringify(this.estabelecimento)}`);
-    return this.estabelecimento;
+  getEmailUsuario() {
+    return this.emailUsuario;
   }
 
 }
