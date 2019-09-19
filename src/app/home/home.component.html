@@ -22,6 +22,7 @@
           <span>Olá, {{ usuario }}!</span>
         </a>
 
+      <mat-divider></mat-divider>
       <a mat-list-item [routerLink]="'/home/dashboard'">
         <mat-icon>payment</mat-icon>
         <span>Movimento Diário</span>
@@ -30,10 +31,9 @@
         <mat-icon>search</mat-icon>
         <span>Pesquisa</span>
       </a>
-
     <a mat-list-item (click)="logout()">
         <mat-icon>home</mat-icon>
-        <span>Logout</span>
+        <span>Sair</span>
     </a>
     </mat-nav-list>
   </mat-sidenav>

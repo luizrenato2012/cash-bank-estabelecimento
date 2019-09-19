@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +26,10 @@ export class LoginComponent implements OnInit {
         this.mensagem = error;
       });
 
+  }
+
+  limpaMensagem() {
+    this.mensagem="";
   }
 
 }

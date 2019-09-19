@@ -12,20 +12,19 @@ import { HomeResolve } from './home/home.resolve';
 //import { RouterModule } from '@angular/router'
 
 const routes : Routes = [
-  {path: '' , component : LoginComponent},
-  {path: 'login' , component : LoginComponent},
-  {path: 'home' ,  component : HomeComponent , 
+  { path: '' , component : LoginComponent },
+  { path: 'login' , component : LoginComponent },
+  { path: 'home' ,  component : HomeComponent , 
     children : [
-      {path: 'pesquisa' ,  component : TransacaoComponent},
-      {path: 'dashboard' ,  component : DashboardComponent},
-      {path: 'teste' ,  component : TesteComponent},
-
+      { path: 'pesquisa' ,  component : TransacaoComponent },
+      { path: 'dashboard' ,  component : DashboardComponent }
     ],
     resolve : {
       estabelecimento : HomeResolve
     }
   },
-  {path: '**' ,       component : NotFoundComponent},
+  { path: '**' ,     component : NotFoundComponent },
+  { path: 'teste' ,  component : TesteComponent },
   { path: '', redirectTo: 'home/dashboard', pathMatch: 'full'},
 ];
 

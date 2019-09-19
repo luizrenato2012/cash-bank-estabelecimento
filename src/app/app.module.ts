@@ -29,7 +29,6 @@ import { MaterialModule } from './material/material.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
-// import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -66,7 +65,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatMenuModule
   ],
   providers: [AngularFireStorage, 
-              LoginService, 
+               
               AngularFireModule, 
               AngularFireAuthModule, 
               ProdutoService, 

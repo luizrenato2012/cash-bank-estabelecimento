@@ -49,31 +49,6 @@ export class TransacaoComponent implements OnInit {
       .catch(error=> console.log("Erro ao incluir\n "+ error)) ;
   }
 
-  incluiTransacoes() {
-    let transacao: any = {};
-    transacao.cnpj= "1111111111";
-    transacao.data = this.zeraHora(new Date());
-    transacao.percentualCashBask=3.5;
-    transacao.usuario={};
-    transacao.usuario.cpf="05580935072";
-    transacao.usuario.nome="Estilio Sanio";
-    
-    transacao.valorTransacao=10.49;
-
-    this.transacaoService.inclui(transacao)
-      .then( ()=> console.log("Transacao incluida com sucesso"))
-      .catch(error=> console.log(error));
-  }
-
-  zeraHora( data: Date) {
-    data.setHours(0);
-    data.setMinutes(0);
-    data.setSeconds(0);
-    data.setMilliseconds(0);
-    return data;
-
-  }
-
   logout() {
     console.log(' iniciando logout');
     this.loginService.logout();

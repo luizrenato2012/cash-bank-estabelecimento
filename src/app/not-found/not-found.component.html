@@ -1,7 +1,9 @@
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-body">Erro</div>
-        <div class="panel-footer">Página não encontrada</div>
-      </div>
-  
-</div>
+<mat-card>
+    <div>
+        <h2>Erro</h2>
+        <h2>Página não encontrada</h2>
+    </div>
+    <a [routerLink]="'/home'">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </a>
+  </mat-card>

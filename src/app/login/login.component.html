@@ -4,13 +4,13 @@
   <mat-card-content>
   <form class="form-signin" #frm_login="ngForm" (ngSubmit)="login()">
     <div class="alerta" *ngIf="mensagem!=''">
-        {{mensagem}}
+        {{ mensagem }}
     </div>
 
     <mat-form-field>
       <mat-label>Entre com o Email</mat-label>
       <input matInput type="email" id="inputEmail" placeholder="Email " required autofocus class="form-control"
-        name="email" [(ngModel)]="email" >
+        name="email" [(ngModel)]="email" (change)="limpaMensagem()">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Entre com a Senha</mat-label>

@@ -6,58 +6,54 @@ import { Observable, Observer } from 'rxjs';
 
 import { Estabelecimento } from './estabelecimento';
 import { LoginService } from '../login/login.service';
+import { EstabelecimentoCacheService } from './estabelecimento-cache.service';
+import undefined = require('firebase/empty-import');
+import { RepositionScrollStrategy } from '@angular/cdk/overlay';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstabelecimentoService {
 
-  constructor(private firebaseDb : AngularFirestore, private loginService: LoginService ) {}
+  constructor(private firebaseDb : AngularFirestore, 
+              private loginService: LoginService,
+              private estabCache : EstabelecimentoCacheService ) {
+    console.log("-> criando EstabelecimentoService");
+  }
+  
+  getListaEstabelecimento(): Observable<Estabelecimento[]> {
+   let email = this.loginService.getEmailUsuario();
+   let estab: any = {};
+   return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
+     ref => ref.where("usuario.email","==",email )).valueChanges(); 
+ }
 
-  // busca (cnpj: string) {
-  //   return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
-  //     ref => ref.where("cnpj","==",cnpj)).valueChanges()
-  //       .subscribe( 
-  //           // retorno => {this.estabelecimento = retorno[0];
-  //           // return this.estabelecimento;
-            
-  //       });
-  // }
-
-  buscaPorUsuario(email:string) {
-    console.log('buscando estabelcimento');
+  buscaPorUsuario(email:string): Observable<Estabelecimento[]> {
+    // console.log('buscando estabelcimento');
     return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
       ref => ref.where("usuario.email","==",email )).valueChanges();
   }
 
-   getListaEstabelecimento(): Observable<Estabelecimento[]> {
+   getEstabelecimento(): Observable<Estabelecimento[]>{
+
     let email = this.loginService.getEmailUsuario();
-    let estab: any = {};
-    return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
-      ref => ref.where("usuario.email","==",email )).valueChanges(); 
+    // console.log(`getEstabelecimento -> email ${email}`);
+    return this.buscaPorUsuario(email);
   }
 
-  async getEstabelecimento(){
-    console.log('getEstabelecimento');
-    return this.buscaPorUsuario(this.loginService.getEmailUsuario());
-    // if (this.estabelecimento==undefined || this.estabelecimento==null ) {
-    //   this.buscaPorUsuario(this.loginService.getEmailUsuario())
-    //     .subscribe(retorno=>  {
-    //       console.log(`Retorno JSON.stringfy(${retorno})`);
-    //       this.estabelecimento = retorno[0];
-    //       return new Observable ((observer: Observer<any>)=> {
-    //         if (this.estabelecimento==undefined || this.estabelecimento==null ) {
-    //           observer.error('Estabalecimento nao encontrado');
-    //         } else {
-    //           observer.next(this.estabelecimento);
-    //         }
-    //       });
-    //     });
-    // } else { 
-    //   return new Observable((observer: Observer<any>)=> {
-    //     observer.next(this.estabelecimento);
-    //   });
-    // }
-  }
+  // getEstabelecimentoCache() {
+  //   let lista :Observable<Estabelecimento[]> = this.estabCache.getEstabelecimento();
+
+  //   return new Observable<Estabelecimento[]>( 
+  //     (observer:Observer<Estabelecimento[]>) =>{
+  //       lista.subscribe((retorno: Estabelecimento[])=>{
+  //         if (retorno==null || retorno.length==0) {
+  //           observer.next(this.buscaPorUsuario(email));
+  //         } else {
+
+  //         }
+  //       });
+  //   });
+  // }
 
 }

@@ -12,7 +12,10 @@ const CNPJ_1="1111111111";
 })
 export class TransacaoService {
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {
+    console.log("-> criando TRansacaoService");
+  }
+
   private transacoes = [];
 
   //TODO passar parametro de CNPJ
@@ -34,7 +37,6 @@ export class TransacaoService {
   }
 
   pesquisaDiaAtual() {
-    console.log("Pesquisando transacoes");
     let  dataAtual = new Date();
     dataAtual.setHours(0);
     dataAtual.setMinutes(0);
@@ -47,7 +49,6 @@ export class TransacaoService {
   }
 
   pesquisaDiaAtualEstabelecimento(cnpj: string) {
-    console.log("Pesquisando transacoes");
     let  dataAtual = new Date();
     dataAtual.setHours(0);
     dataAtual.setMinutes(0);

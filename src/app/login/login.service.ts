@@ -4,27 +4,22 @@ import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth/auth';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { EstabelecimentoService } from '../estabelecimento/estabelecimento.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService implements OnInit{
+export class LoginService {
   
   private _mensagemLogin:string='';
   private emailUsuario: string;
+  user : Observable<firebase.User>;
   
   constructor(private fireAuth :AngularFireAuth, 
     private router: Router) {
-      console.log('criando  service login');
+      console.log('-> criando  LoginService');
       this.user = this.fireAuth.user;    
     }
     
-  ngOnInit(): void {
-    console.log("> Iniciando login service ");
-  }
-
-  user : Observable<firebase.User>;
 
   login(email: string, password: string) {
     let erroConexao = {
@@ -35,9 +30,11 @@ export class LoginService implements OnInit{
       this.fireAuth.auth.signInWithEmailAndPassword(email, password)
         .then(userCredential=>{
           localStorage.user = userCredential.user.uid;
+          localStorage.email = email;
+          
           this._mensagemLogin="";
           this.emailUsuario = email;
-          this.router.navigate(['home']);
+          this.router.navigate(['home/dashboard']);
         }).catch(error=>{
           console.log('Erro ao obter credenciais:\n'+error);
           this._mensagemLogin= error.code==erroConexao.codigo ?  erroConexao.descricao :
@@ -55,11 +52,11 @@ export class LoginService implements OnInit{
   logout() {
     this.fireAuth.auth.signOut();
     localStorage.removeItem("user");
+    localStorage.removeItem("email");
     this.router.navigate(['/login']);
   }
 
   getMensagemLogin() {
-    // console.log('retornando ' + this._mensagemLogin);
     return this._mensagemLogin;
   }
 

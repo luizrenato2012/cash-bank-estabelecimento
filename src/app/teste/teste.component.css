@@ -1,3 +1,9 @@
 table {
     width: 100%;
   }
+
+  .inclusao {
+    border: 1px black solid;
+    margin: 10px;
+    padding: 10px;
+  }

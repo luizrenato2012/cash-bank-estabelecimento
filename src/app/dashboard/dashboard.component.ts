@@ -4,11 +4,11 @@ import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/l
 import { TransacaoService } from '../transacao/transacao.service';
 import { EstabelecimentoService } from '../estabelecimento/estabelecimento.service';
 import { Estabelecimento } from '../estabelecimento/estabelecimento';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
   saldoTotal: number=0;
 
   constructor(private transacaoService : TransacaoService, 
-    private estabelecimentoService : EstabelecimentoService) {}
+              private estabelecimentoService : EstabelecimentoService,
+              private loginService: LoginService ) {}
     
   ngOnInit(): void {
       this.buscaTransacoesDoDia();
@@ -59,5 +60,10 @@ export class DashboardComponent implements OnInit {
           console.log(JSON.stringify(error));
         }
         );
+  }
+
+  teste() {
+    let email = this.loginService.getEmailUsuario();
+    console.log(`email: ${email}`);
   }
 }

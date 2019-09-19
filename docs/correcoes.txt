@@ -14,4 +14,6 @@ Otiimizações
 		-> fazer cache do objeto de estabelecimento
 
 - Tela Login
-		-> Ajustar mensagem 
+		-> Ajustar mensagem - OK 18/09/2019
+-Tela Home
+	- Colocar a dashboard para ser exibida ao logar - OK 18/09/2019

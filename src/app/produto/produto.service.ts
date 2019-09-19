@@ -9,7 +9,9 @@ import { Produto } from './produto';
 })
 export class ProdutoService {
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {
+    console.log("-> criando ProdutoService")
+   }
 
   pesquisaProdutos(argumento: string) {
     if (argumento) {

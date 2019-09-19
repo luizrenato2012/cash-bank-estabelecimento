@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Estabelecimento } from '../estabelecimento/estabelecimento';
 import { Observable } from 'rxjs';
 import { EstabelecimentoService } from '../estabelecimento/estabelecimento.service';
+import { TransacaoService } from '../transacao/transacao.service';
 
 export interface Transaction {
   item: string;
@@ -17,35 +18,36 @@ export interface Transaction {
 })
 export class TesteComponent  {
 
-  displayedColumns: string[] = ['item', 'cost'];
-  transactions: Transaction[]; 
+  valor1:number = 5;
+  valor2:number = 12.3;
+  valor3:number = 55.234;
 
-  /** Gets the total cost of all transactions. */
-  getTotalCost() {
-    return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+  constructor( private transacaoService: TransacaoService) { }
+
+
+  incluiTransacoes() {
+    let transacao: any = {};
+    transacao.cnpj= "1111111111";
+    transacao.data = this.zeraHora(new Date());
+    transacao.percentualCashBask=3.5;
+    transacao.usuario={};
+    transacao.usuario.cpf="05580935072";
+    transacao.usuario.nome="Estilio Sanio";
+    
+    transacao.valorTransacao=10.49;
+
+    this.transacaoService.inclui(transacao)
+      .then( ()=> console.log("Transacao incluida com sucesso"))
+      .catch(error=> console.log(error));
   }
 
+  zeraHora( data: Date) {
+    data.setHours(0);
+    data.setMinutes(0);
+    data.setSeconds(0);
+    data.setMilliseconds(0);
+    return data;
 
-  constructor(private db : AngularFirestore, private estabelecimentoService: EstabelecimentoService) { }
-
-  teste() {
-    this.transactions =  [
-      {item: 'Beach ball', cost: 4},
-      {item: 'Towel', cost: 5},
-      {item: 'Frisbee', cost: 2},
-      {item: 'Sunscreen', cost: 4},
-      {item: 'Cooler', cost: 25},
-      {item: 'Swim suit', cost: 15},
-    ];
-    // let email="mauro@vestebem.com.br";
-    // let cnpj="1111111111";
-    // return this.db.collection<Estabelecimento>("estabelecimento" , 
-    //     // ref => ref.where("cnpj","==",cnpj ))
-    //    ref => ref.where("usuario.email","==",email))
-    //             .valueChanges()
-    //             .subscribe(retorno=> {
-    //     console.log(`retorno ${retorno}`);
-    //   });
   }
 
 
