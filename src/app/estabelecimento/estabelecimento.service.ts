@@ -7,8 +7,6 @@ import { Observable, Observer } from 'rxjs';
 import { Estabelecimento } from './estabelecimento';
 import { LoginService } from '../login/login.service';
 import { EstabelecimentoCacheService } from './estabelecimento-cache.service';
-import undefined = require('firebase/empty-import');
-import { RepositionScrollStrategy } from '@angular/cdk/overlay';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +34,8 @@ export class EstabelecimentoService {
 
    getEstabelecimento(): Observable<Estabelecimento[]>{
 
-    let email = this.loginService.getEmailUsuario();
+    let email = localStorage.email;  //this.loginService.getEmailUsuario();
+    if (!email) throw new Error("Email invalido");
     // console.log(`getEstabelecimento -> email ${email}`);
     return this.buscaPorUsuario(email);
   }

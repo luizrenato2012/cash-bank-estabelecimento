@@ -17,3 +17,8 @@ Otiimizações
 		-> Ajustar mensagem - OK 18/09/2019
 -Tela Home
 	- Colocar a dashboard para ser exibida ao logar - OK 18/09/2019
+
+Tela Not Found
+	 - Não volta pra tela de menu (erro na obtenção do email p/  pesquisar estabelecimento)
+	 	-> colocar email no locaStore (provisório) pois services de Login e Estabelecimento estão sendo recriados OK 19/09/2019
+		-> implementar cache de estabelecimento para evitar pesquisar todas as vezes 

@@ -30,8 +30,8 @@ export class LoginService {
       this.fireAuth.auth.signInWithEmailAndPassword(email, password)
         .then(userCredential=>{
           localStorage.user = userCredential.user.uid;
-          localStorage.email = email;
-          
+          localStorage.email = email; //TODO colocar em outro tipo de armazenamento
+
           this._mensagemLogin="";
           this.emailUsuario = email;
           this.router.navigate(['home/dashboard']);
