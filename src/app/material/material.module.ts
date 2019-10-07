@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -29,7 +30,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     MatSidenavModule,
     MatNativeDateModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSnackBarModule
   ],
   exports : [
     CommonModule,

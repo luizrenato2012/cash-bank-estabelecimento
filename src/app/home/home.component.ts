@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { LoginService } from '../login/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EstabelecimentoService } from '../estabelecimento/estabelecimento.service';
@@ -22,23 +19,19 @@ export class HomeComponent implements OnInit {
               private activatecRoute: ActivatedRoute ) { }
   
   ngOnInit(): void {
-    console.log('onInit HomeComponent');
+  //  console.log('onInit HomeComponent');
     let estabelecimento : any = {};
     console.log(`snapshot ${JSON.stringify(this.activatecRoute.snapshot.data)}`);
     
     this.activatecRoute.snapshot.data.estabelecimento
       .subscribe( (retorno:any) => {
-        console.log('onInit subscribe ${JSON.stringify(retorno)}');
+      //  console.log('onInit subscribe ${JSON.stringify(retorno)}');
         this.estabelecimento=  retorno[0];
         this.nomeEstabelecimento = this.estabelecimento.nome;
         this.cnpj = this.estabelecimento.cnpj;
         this.usuario = this.estabelecimento.usuario.nome;
       })
     console.log(`estabelecimento ${JSON.stringify(this.estabelecimento)}`);
-  }
-
-  logout() {
-    this.loginService.logout();
   }
 
 }

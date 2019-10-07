@@ -18,12 +18,14 @@ export class DashboardComponent implements OnInit {
 
   saldoDia:number=0;
   saldoTotal: number=0;
+  dataAtual: Date;
 
   constructor(private transacaoService : TransacaoService, 
               private estabelecimentoService : EstabelecimentoService,
               private loginService: LoginService ) {}
     
   ngOnInit(): void {
+    this.dataAtual = new Date();
       this.buscaTransacoesDoDia();
   }
 

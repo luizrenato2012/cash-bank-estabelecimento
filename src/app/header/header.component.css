@@ -1,0 +1,13 @@
+
+mat-toolbar {
+    background: orange;
+  }
+  
+  sidenav-container {
+    height: 100%;
+    margin: 5px;
+  }
+
+  .mat-icon {
+    margin-right: 10px;
+  }

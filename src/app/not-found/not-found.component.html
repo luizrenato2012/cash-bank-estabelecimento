@@ -1,4 +1,7 @@
-<mat-card>
+<mat-sidenav-container fullscreen class="container">
+<app-header></app-header>
+
+<mat-card style="border: 1px black solid">
     <div>
         <h2>Erro</h2>
         <h2>Página não encontrada</h2>
@@ -6,4 +9,5 @@
     <a [routerLink]="'/home'">
       <mat-icon>keyboard_backspace</mat-icon>
     </a>
-  </mat-card>
+</mat-card>
+</mat-sidenav-container>

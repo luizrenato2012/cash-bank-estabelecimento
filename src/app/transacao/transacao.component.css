@@ -1,5 +1,7 @@
 table {
-    width: 100%;
+    width: 95%;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .mat-raised-button {
@@ -10,43 +12,15 @@ h3 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/*
-.data-cell {
-    text-align: left;
-    margin: 10px auto;
+.alert-danger {
+    background-color: #f44336; /* Red */
 }
-
-body {
-    font-size: 150%;
+.alert-success {
+    background-color: #36f456;  
+} 
+.alert{
+    padding: 20px;
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
 }
-
-.mat-header-row {
-    font-size: 130%;
-    
-}
-
-.mat-header-cell  {
-    font-size: 65%;
-}
-
-.mat-footer-cell {
-    margin-right: 60px;
-    font-weight: bold;
-}
-
-.label {
-    font-size: 105%;
-}
-
-tr.mat-footer-row {
-    font-weight: bold;
-}
-
-.largura25 {
-    width: 25%;
-}
-
-.largura50 {
-    width: 50%;
-}
-*/

@@ -3,22 +3,22 @@
 <mat-card>
   <mat-card-content>
   <form class="form-signin" #frm_login="ngForm" (ngSubmit)="login()">
-    <div class="alerta" *ngIf="mensagem!=''">
-        {{ mensagem }}
-    </div>
 
     <mat-form-field>
       <mat-label>Entre com o Email</mat-label>
       <input matInput type="email" id="inputEmail" placeholder="Email " required autofocus class="form-control"
-        name="email" [(ngModel)]="email" (change)="limpaMensagem()">
+        name="email" [(ngModel)]="email" (change)="limpaMensagem()" required>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Entre com a Senha</mat-label>
       <input type="password" matInput id="inputPassword" placeholder="Senha" required class="form-control"
         name="password" [(ngModel)]="password">
-    </mat-form-field>
+      </mat-form-field>
+      <mat-error>{{ mensagem }}</mat-error>
+      <br>
     <div>  
-       <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px">Login</button>
+       <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px"
+        [disabled]="frm_login.invalid && (frm_login.dirty || frm_login.touched)">Login</button>
     </div >   
   </form>
 </mat-card-content>
