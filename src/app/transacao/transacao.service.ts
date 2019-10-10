@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 
 
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { Transacao, DataFirebase } from './transacao';
+import { AngularFirestore, AngularFirestoreCollection, QueryFn } from '@angular/fire/firestore';
 
 const CNPJ_1="1111111111";
 
@@ -13,26 +11,28 @@ const CNPJ_1="1111111111";
 export class TransacaoService {
 
   constructor(private db: AngularFirestore) {
-    console.log("-> criando TRansacaoService");
   }
 
   private transacoes = [];
 
   //TODO passar parametro de CNPJ
-  pesquisa(dataInicial: Date, dataFinal:Date) {
-    // console.log("Pesquisando transacoes");
+  pesquisa(dataInicial: Date, dataFinal:Date, situacao: string) {
+    console.log("Pesquisando transacoes");
+    let queryFnTodas = (ref) => ref
+    .orderBy("data")
+    .where("data", ">=", dataInicial)
+    .where("data", "<=", dataFinal);
 
-    let retorno = this.db.collection("transacoes", 
-      ref => ref
-                .orderBy("data")
-                // .where("cnpj","==", CNPJ)
-                //.startAt("data", new Date('2019-09-01'))
-                // .startAt(dataInicial)
-                // .endAt(dataFinal)
-                  .where("data", ">=", dataInicial)
-                  .where("data", "<=", dataFinal)
-                ).valueChanges();
-                
+    let queryFnsituacao = (ref) => ref
+      .orderBy("data")
+      .where("data", ">=", dataInicial)
+      .where("data", "<=", dataFinal)
+      .where("situacao.codigo", "==", situacao);
+
+    let retorno = this.db.collection("transacoes", ( 
+        situacao=='TODAS' ? queryFnTodas : queryFnsituacao )
+      ).valueChanges();  
+
     return retorno;
   }
 
@@ -66,6 +66,24 @@ export class TransacaoService {
     transacao.id = this.db.createId();
     let collection : AngularFirestoreCollection  =this.db.collection("transacoes"); 
     return collection.doc(transacao.id).set(transacao);
+  }
+
+  async setaHora()  {
+    let listaIds : string[] = []; 
+    let transacoes : any[] = [];
+    console.log('inclui hora');
+   let hora =new Date();
+
+    let collection :  AngularFirestoreCollection  = this.db.collection("transacoes");
+    collection.valueChanges()
+      .subscribe(retorno=>  
+        retorno.forEach(transacao => {
+          console.log(' alterando Data');
+          Object.assign(hora, transacao.data.toDate());
+          transacao.hora = hora;
+          //  collection.doc(transacao.id).update(transacao);
+    }));
+    
   }
 
   totalliza(transacoes : any []) {

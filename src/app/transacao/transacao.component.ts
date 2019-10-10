@@ -16,13 +16,14 @@ export class TransacaoComponent implements OnInit {
   argumento="";
   dataInicial: Date;
   dataFinal: Date;
-  displayedColumns = ["data", "cpf", "nome", "percentualCashBack","valorTransacao","situacao"];
+  displayedColumns = ["data", "cpf", "nome", "valorTransacao", "percentualCashBack","valorCashBack","situacao"];
 
   transacao : any = {};
   dataTransacao : Date;
 
   transacoes = [];
-  valorTotal : number
+  valorTotal : number;
+  situacao:string;
 
   constructor( private loginService: LoginService, 
               private transacaoService: TransacaoService,
@@ -33,8 +34,8 @@ export class TransacaoComponent implements OnInit {
   }
 
   pesquisa(form: NgForm) {
-    console.log(`pesquisando form`);
-    this.transacaoService.pesquisa(this.dataInicial, this.dataFinal)
+    console.log(`pesquisando ${this.situacao}`);
+    this.transacaoService.pesquisa(this.dataInicial, this.dataFinal, this.situacao)
       .subscribe(retorno =>  {
                 this.transacoes = retorno;
                 let mensagem = `Encontradas ${this.transacoes.length} transações!`;
