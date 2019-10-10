@@ -18,7 +18,7 @@
       <br>
     <div>  
        <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px"
-        [disabled]="(frm_login.dirty || frm_login.touched) && frm_login.invalid">Login</button>
+        [disabled]="frm_login.invalid && (frm_login.dirty || frm_login.touched)">Login</button>
     </div >   
   </form>
 </mat-card-content>
