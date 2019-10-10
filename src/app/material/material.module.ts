@@ -13,6 +13,7 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -31,7 +32,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSidenavModule,
     MatNativeDateModule,
     FlexLayoutModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ],
   exports : [
     CommonModule,
@@ -46,7 +48,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     MatSidenavModule,
     MatNativeDateModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule
   ],
   declarations: [],
   providers: [MatNativeDateModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
