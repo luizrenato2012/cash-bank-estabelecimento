@@ -4,4 +4,12 @@
 .grid-container {
     margin: 20px;
 }
+
+.pendente {
+   color: #f44336; 
+}
+  
+.concluida {
+   color: #3643f4;  
+}
   

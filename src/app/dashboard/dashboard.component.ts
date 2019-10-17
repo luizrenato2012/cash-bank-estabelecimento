@@ -41,9 +41,11 @@ export class DashboardComponent implements OnInit {
     this.transacaoService.pesquisaTransacoesHoje(estabelecimento.cnpj)
       .subscribe((retorno: any[])=>{
         this.transacoes = retorno;
-        let saldos = this.transacaoService.totalliza(this.transacoes);
+        let saldos = this.transacaoService.totaliza(this.transacoes);
         this.saldoDia = saldos.saldoDia;
         this.saldoCashBackDia = saldos.saldoCashBack;
+
+        console.log(` saldo dia ${this.saldoDia} - saldo cash - ${this.saldoCashBackDia}`)
       });
 
   }

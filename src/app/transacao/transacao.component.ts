@@ -47,7 +47,7 @@ export class TransacaoComponent implements OnInit {
                 this.snackBar.open(mensagem, "Pesquisar", {
                   duration: 2000
                 });
-                this.valorTotal = this.transacaoService.totalliza(this.transacoes);
+                this.valorTotal = this.transacaoService.totaliza(this.transacoes);
               },
               error => {
                 console.log(error);

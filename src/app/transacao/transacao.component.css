@@ -14,14 +14,7 @@ table {
 h3 {
     font-family: Arial, Helvetica, sans-serif;
 }
-
-.pendente {
-   color: #f44336; 
-}
-
-.concluida {
-    color: #3643f4;  
-} 
+ 
 .alert{
     padding: 20px;
     color: white;

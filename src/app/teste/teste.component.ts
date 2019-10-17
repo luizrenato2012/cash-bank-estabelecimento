@@ -88,8 +88,18 @@ export class TesteComponent  {
     transacao.valorTransacao=10.49;
 
     this.transacaoService.inclui(transacao)
-      .then( ()=> console.log("Transacao incluida com sucesso"))
+      .then( ()=> { 
+                console.log("Transacao incluida com sucesso");
+                this.limpaTransacao();
+              })
       .catch(error=> console.log(error));
+  }
+
+  limpaTransacao() {
+    this.transacao = {};
+    this.transacao.usuario={};
+    this.valorTransacao="";
+    this.percentualCashBack="";
   }
 
   zeraHora( data: Date) {

@@ -88,16 +88,18 @@ export class TransacaoService {
     
   }
 
-  totalliza(transacoes : any []) : any{
+  totaliza(transacoes : any []) : any{
+    let saldoDia=0;
+    let saldoCashBack=0;
+
     if (!transacoes || transacoes.length==0) {
-      return 0;
+      return {saldoDia, saldoCashBack};
     }
-    let saldoDia =  transacoes.map(transacao => transacao.valorTransacao)
+    saldoDia =  transacoes.map(transacao => transacao.valorTransacao)
       .reduce( (total, atual) => total+atual);
 
-    let saldoCashBack = transacoes.map(transacao => transacao.valorCashBack)
+    saldoCashBack = transacoes.map(transacao => transacao.valorCashBack)
       .reduce( (total, atual) => total+atual);
-    console.log('Totalizando ');
     return {saldoDia, saldoCashBack};  
   }
   
