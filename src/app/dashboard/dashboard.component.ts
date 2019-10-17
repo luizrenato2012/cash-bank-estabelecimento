@@ -12,10 +12,12 @@ import { EstabelecimentoCacheService } from '../estabelecimento/estabelecimento-
 export class DashboardComponent implements OnInit {
   
   transacoes : any [] = [];
-  displayedColumns = ["data", "cpf", "nome", "percentualCashBack","valorTransacao"];
+  displayedColumns = ["cnpj", "data", "cpf", "nome", "valorTransacao", "percentualCashBack","valorCashBack","situacao"];
 
   saldoDia:number=0;
   saldoTotal: number=0;
+  saldoCashBackDia : number =0;
+
   dataAtual: Date;
 
   constructor(private transacaoService : TransacaoService, 
@@ -23,8 +25,12 @@ export class DashboardComponent implements OnInit {
               private estabelecimentoCache: EstabelecimentoCacheService ) {}
     
   ngOnInit(): void {
-    this.dataAtual = new Date();
+    try {
+      this.dataAtual = new Date();
       this.buscaTransacoesDoDia();
+    } catch (error) {
+      alert('Erro ao iniciar tela ')
+    }
   }
 
   async buscaTransacoesDoDia() {
@@ -35,13 +41,11 @@ export class DashboardComponent implements OnInit {
     this.transacaoService.pesquisaTransacoesHoje(estabelecimento.cnpj)
       .subscribe((retorno: any[])=>{
         this.transacoes = retorno;
-        this.saldoDia = this.transacaoService.totalliza(this.transacoes);
+        let saldos = this.transacaoService.totalliza(this.transacoes);
+        this.saldoDia = saldos.saldoDia;
+        this.saldoCashBackDia = saldos.saldoCashBack;
       });
 
   }
 
-  teste() {
-    let email = this.loginService.getEmailUsuario();
-    console.log(`email: ${email}`);
-  }
 }

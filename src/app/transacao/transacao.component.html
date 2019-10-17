@@ -32,7 +32,6 @@
 
 <div>
   <table mat-table [dataSource]="transacoes" class="mat-elevation-z8">
-    <!-- Data Column -->
 
     <ng-container matColumnDef="cnpj">
       <th mat-header-cell *matHeaderCellDef> CNPJ </th>
@@ -62,18 +61,21 @@
 
     <ng-container matColumnDef="valorTransacao">
       <th mat-header-cell *matHeaderCellDef> Valor </th>
-      <td mat-cell *matCellDef="let transaction" [ngClass]="transaction.situacao?.codigo=='PENDENTE' ? 'pendente' : 'concluida'"> {{transaction.valorTransacao}} </td>
+      <td mat-cell *matCellDef="let transaction" [ngClass]="transaction.situacao?.codigo=='PENDENTE' ? 'pendente' : 'concluida'"> 
+        {{ transaction.valorTransacao | number :'1.2-2':'pt' }} </td>
     </ng-container>
 
     <!-- percentualCashBack Column -->
     <ng-container matColumnDef="percentualCashBack">
       <th mat-header-cell *matHeaderCellDef> Percentual </th>
-      <td mat-cell *matCellDef="let transaction" [ngClass]="transaction.situacao?.codigo=='PENDENTE' ? 'pendente' : 'concluida'"> {{transaction.percentualCashBack}} </td>
+      <td mat-cell *matCellDef="let transaction" [ngClass]="transaction.situacao?.codigo=='PENDENTE' ? 'pendente' : 'concluida'"> 
+        {{  transaction.percentualCashBack | number :'1.2-2':'pt' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="valorCashBack">
       <th mat-header-cell *matHeaderCellDef> Valor Cash Back</th>
-      <td mat-cell *matCellDef="let transaction" [ngClass]="transaction.situacao?.codigo=='PENDENTE' ? 'pendente' : 'concluida'"> {{transaction.valorCashBack}} </td>
+      <td mat-cell *matCellDef="let transaction" [ngClass]="transaction.situacao?.codigo=='PENDENTE' ? 'pendente' : 'concluida'"> 
+        {{  transaction.valorCashBack | number:'1.2-2':'pt'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="situacao">

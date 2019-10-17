@@ -32,6 +32,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import localeBr from '@angular/common/locales/br';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeBr, 'pt');
+
 @NgModule({
   declarations: [
     TimestampToDate,
@@ -73,7 +78,8 @@ import { HttpClientModule } from '@angular/common/http';
               AngularFireModule, 
               AngularFireAuthModule, 
               ProdutoService, 
-              EstabelecimentoService],
+              EstabelecimentoService,
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
