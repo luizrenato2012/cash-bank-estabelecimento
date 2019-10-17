@@ -16,18 +16,20 @@ export class TransacaoService {
   private transacoes = [];
 
   //TODO passar parametro de CNPJ
-  pesquisa(dataInicial: Date, dataFinal:Date, situacao: string) {
+  pesquisa(dataInicial: Date, dataFinal:Date, situacao:string, cnpj: string) {
     console.log("Pesquisando transacoes");
     let queryFnTodas = (ref) => ref
     .orderBy("data")
     .where("data", ">=", dataInicial)
-    .where("data", "<=", dataFinal);
+    .where("data", "<=", dataFinal)
+    .where("cnpj", "==", cnpj);
 
     let queryFnsituacao = (ref) => ref
       .orderBy("data")
       .where("data", ">=", dataInicial)
       .where("data", "<=", dataFinal)
-      .where("situacao.codigo", "==", situacao);
+      .where("situacao.codigo", "==", situacao)
+      .where("cnpj", "==", cnpj);
 
     let retorno = this.db.collection("transacoes", ( 
         situacao=='TODAS' ? queryFnTodas : queryFnsituacao )
@@ -36,19 +38,19 @@ export class TransacaoService {
     return retorno;
   }
 
-  pesquisaDiaAtual() {
-    let  dataAtual = new Date();
-    dataAtual.setHours(0);
-    dataAtual.setMinutes(0);
-    dataAtual.setSeconds(0);
-    dataAtual.setMilliseconds(0);
+  // pesquisaDiaAtual() {
+  //   let  dataAtual = new Date();
+  //   dataAtual.setHours(0);
+  //   dataAtual.setMinutes(0);
+  //   dataAtual.setSeconds(0);
+  //   dataAtual.setMilliseconds(0);
 
-    return this.db.collection("transacoes", 
-      ref => ref.where("data", "==", dataAtual))
-        .valueChanges();
-  }
+  //   return this.db.collection("transacoes", 
+  //     ref => ref.where("data", "==", dataAtual))
+  //       .valueChanges();
+  // }
 
-  pesquisaDiaAtualEstabelecimento(cnpj: string) {
+  pesquisaTransacoesHoje(cnpj: string) {
     let  dataAtual = new Date();
     dataAtual.setHours(0);
     dataAtual.setMinutes(0);

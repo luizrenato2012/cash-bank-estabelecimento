@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, pipe } from 'rxjs';
 
 import { Estabelecimento } from './estabelecimento';
 import { LoginService } from '../login/login.service';
-import { EstabelecimentoCacheService } from './estabelecimento-cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,7 @@ import { EstabelecimentoCacheService } from './estabelecimento-cache.service';
 export class EstabelecimentoService {
 
   constructor(private firebaseDb : AngularFirestore, 
-              private loginService: LoginService,
-              private estabCache : EstabelecimentoCacheService ) {
+              private loginService: LoginService) {
     console.log("-> criando EstabelecimentoService");
   }
   
@@ -26,33 +24,23 @@ export class EstabelecimentoService {
      ref => ref.where("usuario.email","==",email )).valueChanges(); 
  }
 
+ getEstabelecimento(): Observable<Estabelecimento[]>{
+
+  let email = localStorage.email;  //this.loginService.getEmailUsuario();
+  if (!email) throw new Error("Email invalido");
+  // console.log(`getEstabelecimento -> email ${email}`);
+  return this.buscaPorUsuario(email);
+}
+
   buscaPorUsuario(email:string): Observable<Estabelecimento[]> {
     // console.log('buscando estabelcimento');
     return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
       ref => ref.where("usuario.email","==",email )).valueChanges();
   }
 
-   getEstabelecimento(): Observable<Estabelecimento[]>{
-
-    let email = localStorage.email;  //this.loginService.getEmailUsuario();
-    if (!email) throw new Error("Email invalido");
-    // console.log(`getEstabelecimento -> email ${email}`);
-    return this.buscaPorUsuario(email);
+  buscaPorUsuarioAsync(email:string) {
+    return this.firebaseDb.collection<Estabelecimento>("estabelecimento" , 
+      ref => ref.where("usuario.email","==",email )).valueChanges().toPromise();
   }
-
-  // getEstabelecimentoCache() {
-  //   let lista :Observable<Estabelecimento[]> = this.estabCache.getEstabelecimento();
-
-  //   return new Observable<Estabelecimento[]>( 
-  //     (observer:Observer<Estabelecimento[]>) =>{
-  //       lista.subscribe((retorno: Estabelecimento[])=>{
-  //         if (retorno==null || retorno.length==0) {
-  //           observer.next(this.buscaPorUsuario(email));
-  //         } else {
-
-  //         }
-  //       });
-  //   });
-  // }
 
 }

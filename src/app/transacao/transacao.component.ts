@@ -4,6 +4,8 @@ import { TransacaoService } from './transacao.service';
 import { EstabelecimentoService } from '../estabelecimento/estabelecimento.service';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { EstabelecimentoCacheService } from '../estabelecimento/estabelecimento-cache.service';
+import { Estabelecimento } from '../estabelecimento/estabelecimento';
 
 @Component({
   selector: 'app-transacao',
@@ -16,7 +18,7 @@ export class TransacaoComponent implements OnInit {
   argumento="";
   dataInicial: Date;
   dataFinal: Date;
-  displayedColumns = ["data", "cpf", "nome", "valorTransacao", "percentualCashBack","valorCashBack","situacao"];
+  displayedColumns = ["cnpj", "data", "cpf", "nome", "valorTransacao", "percentualCashBack","valorCashBack","situacao"];
 
   transacao : any = {};
   dataTransacao : Date;
@@ -28,14 +30,17 @@ export class TransacaoComponent implements OnInit {
   constructor( private loginService: LoginService, 
               private transacaoService: TransacaoService,
               private estabelecimentoService : EstabelecimentoService,
+              private estabelecimentoCache : EstabelecimentoCacheService,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
 
-  pesquisa(form: NgForm) {
+  async pesquisa(form: NgForm) {
     console.log(`pesquisando ${this.situacao}`);
-    this.transacaoService.pesquisa(this.dataInicial, this.dataFinal, this.situacao)
+    let estabelecimento: Estabelecimento = await this.estabelecimentoCache.getEstabelecimento();
+    
+    this.transacaoService.pesquisa(this.dataInicial, this.dataFinal, this.situacao, estabelecimento.cnpj)
       .subscribe(retorno =>  {
                 this.transacoes = retorno;
                 let mensagem = `Encontradas ${this.transacoes.length} transações!`;

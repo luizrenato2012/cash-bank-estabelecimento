@@ -2,13 +2,14 @@ export class Transacao {
     id:string;
     cnpj:string;
     data : DataFirebase;
+    hora: DataFirebase;
     
-    percentualCashBack: number;
     valorTransacao: number;
+    percentualCashBack: number;
+    valorCashBack: number;
 
-    constructor() {
-        this.cnpj='1111111111';
-    }
+    situacao : any = {codigo: 'PENDENTE', dataAtualizacao: new Date()};
+    usuario: any;
 
 }
 

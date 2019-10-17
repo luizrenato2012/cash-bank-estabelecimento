@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { EstabelecimentoCacheService } from '../estabelecimento/estabelecimento-cache.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,12 @@ export class LoginComponent implements OnInit {
   password='';
   mensagem='';
 
-  constructor(private loginService : LoginService) { }
+  constructor(private loginService : LoginService,
+              private estabelecimentoService : EstabelecimentoCacheService) { }
 
   ngOnInit() {
     this.mensagem= this.loginService.getMensagemLogin();
+    this.estabelecimentoService.apaga();
   }
 
   login() {

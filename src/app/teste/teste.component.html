@@ -1,9 +1,43 @@
-<div class="inclusao">
-  
-</div>
+
 
 <div>
   <button type="button" mat-raised-button color="primary" (click)="teste()">Teste</button>
-  <button type="button" mat-raised-button color="warn"(click)="testeMap()">Teste Map</button>
+  <button type="button" mat-raised-button color="warn" (click)="testeMap()">Teste Map</button>
 </div>
+<br><br>
 
+<mat-card>
+    <form #frm_transacao="ngForm" (submit)="grava()">
+      <mat-form-field>
+        <mat-label class="label">Data da Transação</mat-label>
+        <input [value]="dataTransacao" matInput [matDatepicker]="myPicker" placeholder="data" name="dataTransacao"
+          style="margin-right: 15px" name="dataTransacao" [(ngModel)]="dataTransacao" required>
+        <mat-datepicker-toggle matSuffix [for]="myPicker"></mat-datepicker-toggle>
+        <mat-datepicker #myPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Valor" [value]="valorTransacao" name="valorTransacao"
+          [(ngModel)]="valorTransacao" placeholder="Valor transação">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Percentual" [value]="percentualCashBack" name="percentualCashBack"
+          [(ngModel)]="percentualCashBack">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Nome" [value]="transacao.usuario.nome" name="nome"
+          [(ngModel)]="transacao.usuario.nome">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="CPF" [value]="transacao.usuario.cpf" name="cpf"
+          [(ngModel)]="transacao.usuario.cpf">
+      </mat-form-field>
+      <br>
+      <button  type="button" mat-raised-button color="primary" (click)="grava()">Grava</button>
+
+    </form>
+
+</mat-card>

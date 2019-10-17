@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
 import { TransacaoService } from '../transacao/transacao.service';
-import { EstabelecimentoService } from '../estabelecimento/estabelecimento.service';
 import { Estabelecimento } from '../estabelecimento/estabelecimento';
 import { LoginService } from '../login/login.service';
+import { EstabelecimentoCacheService } from '../estabelecimento/estabelecimento-cache.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,47 +19,25 @@ export class DashboardComponent implements OnInit {
   dataAtual: Date;
 
   constructor(private transacaoService : TransacaoService, 
-              private estabelecimentoService : EstabelecimentoService,
-              private loginService: LoginService ) {}
+              private loginService: LoginService,
+              private estabelecimentoCache: EstabelecimentoCacheService ) {}
     
   ngOnInit(): void {
     this.dataAtual = new Date();
       this.buscaTransacoesDoDia();
   }
 
-  buscaTransacoesDoDia() {
-    let estabelecimento : Estabelecimento;
-    this.estabelecimentoService.getListaEstabelecimento()
-            .subscribe( (retorno: Estabelecimento[])=> {
-              estabelecimento = retorno[0];
-              this.saldoTotal = estabelecimento.saldo;
-              this.transacaoService.pesquisaDiaAtualEstabelecimento(estabelecimento.cnpj)
-                .subscribe((retorno: any[])=>{
-                  this.transacoes = retorno;
-                  this.saldoDia = this.transacaoService.totalliza(this.transacoes);
-                });
+  async buscaTransacoesDoDia() {
 
-    }, (error)=> {
-      console.log(`Erro ao iniciar dashboard ${error}`);
-    });
+    let estabelecimento : Estabelecimento = await this.estabelecimentoCache.getEstabelecimento(true);
+    this.saldoTotal = estabelecimento.saldo;
 
+    this.transacaoService.pesquisaTransacoesHoje(estabelecimento.cnpj)
+      .subscribe((retorno: any[])=>{
+        this.transacoes = retorno;
+        this.saldoDia = this.transacaoService.totalliza(this.transacoes);
+      });
 
-    
-    this.transacaoService.pesquisaDiaAtual()
-      .subscribe( retorno => {
-          this.transacoes = retorno;
-          this.saldoDia = this.transacaoService.totalliza(this.transacoes);
-          this.estabelecimentoService.getListaEstabelecimento()
-            .subscribe( (retorno: Estabelecimento[])=> {
-              this.saldoTotal = retorno[0].saldo;
-            });
-          
-        },
-        error => {
-          console.log("Erro ao buscas transacoes");
-          console.log(JSON.stringify(error));
-        }
-        );
   }
 
   teste() {

@@ -17,14 +17,14 @@ const routes : Routes = [
   { path: 'home' ,  component : HomeComponent , 
     children : [
       { path: 'pesquisa' ,  component : TransacaoComponent },
-      { path: 'dashboard' ,  component : DashboardComponent }
+      { path: 'dashboard' ,  component : DashboardComponent },
+      { path: 'teste' ,  component : TesteComponent }
     ],
     resolve : {
       estabelecimento : HomeResolve
     }
   },
   { path: '**' ,     component : NotFoundComponent },
-  { path: 'teste' ,  component : TesteComponent },
   { path: '', redirectTo: 'home/dashboard', pathMatch: 'full'},
 ];
 
