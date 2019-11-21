@@ -12,9 +12,9 @@
     <mat-form-field>
       <mat-label>Entre com a Senha</mat-label>
       <input type="password" matInput id="inputPassword" placeholder="Senha" required class="form-control"
-        name="password" [(ngModel)]="password">
+        name="password" [(ngModel)]="password"  (change)="limpaMensagem()">
       </mat-form-field>
-      <mat-error>{{ mensagem }}</mat-error>
+      <mat-error *ngIf="mensagem!=''">{{ mensagem }}</mat-error>
       <br>
     <div>  
        <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px"

@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   limpaMensagem() {
+    console.log("Limpando mensagem");
     this.mensagem="";
   }
 
